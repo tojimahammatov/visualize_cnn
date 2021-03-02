@@ -3,6 +3,8 @@ package com.example.visualize_cnn;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -86,7 +88,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void loadImage(){
-
+        // load image from drawable
+        String drawable_uri = "@drawable/cats.jpeg";
+        int imageResource = getResources().getIdentifier(drawable_uri, null, getPackageName());
+        @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable = getApplicationContext().getDrawable(imageResource);
+        mImageView.setImageDrawable(drawable);
     }
 
     private void updateTextView(String text){
