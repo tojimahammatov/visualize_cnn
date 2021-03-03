@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private Button mBackToRGBButton;
     private Button mApplyCNNButton;
 
+    private String[] filters = {"Edge", "Blur", "Mean", "Random"};
+    private int filter_index = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // change the filter to previous
                 // update TextView (mFilterTextView)
+                updateFilterTextView(false);
             }
         });
 
@@ -65,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // change the filter to next
                 // update TextView (mFilterTextView)
+                updateFilterTextView(true);
             }
         });
 
@@ -72,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // load original image to imageview (mImageView)
+                loadOriginalImage();
             }
         });
 
@@ -87,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void loadImage(){
+    private void loadOriginalImage(){
         // load image from drawable
         String drawable_uri = "@drawable/cats.jpeg";
         int imageResource = getResources().getIdentifier(drawable_uri, null, getPackageName());
@@ -95,8 +101,12 @@ public class MainActivity extends AppCompatActivity {
         mImageView.setImageDrawable(drawable);
     }
 
-    private void updateTextView(String text){
-
+    private void updateFilterTextView(boolean to_next){
+        if (to_next){
+            mFilterTextView.setText(filters[(++filter_index) % filters.length]);
+        }else{
+            mFilterTextView.setText(filters[(--filter_index) % filters.length]);
+        }
     }
 
 
