@@ -78,13 +78,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // load original image to imageview (mImageView)
                 loadOriginalImage();
+
+                // enable applyCNNbutton
+                mApplyCNNButton.setEnabled(true);
             }
         });
 
         mApplyCNNButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // get data in imageview
+                // disable applyCNNbutton
+                mApplyCNNButton.setEnabled(false);
+
+                // get image from assets (later from imageview output)
                 // apply cnn to the data
                 // load the result into imageview
             }
