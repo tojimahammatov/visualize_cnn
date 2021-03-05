@@ -4,12 +4,19 @@ package com.example.visualize_cnn;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.pytorch.Module;
+import org.pytorch.Tensor;
+import org.pytorch.torchvision.TensorImageUtils;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mBackToRGBButton;
     private Button mApplyCNNButton;
 
-    private String[] filters = {"Edge", "Blur", "Mean", "Random"};
+    private String[] filters = {"Edge", "Blur", "Gaussian Blur", "Sharpen", "Random"};
     private int filter_index = 0;
 
 
@@ -90,8 +97,15 @@ public class MainActivity extends AppCompatActivity {
                 // disable applyCNNbutton
                 mApplyCNNButton.setEnabled(false);
 
-                // get image from assets (later from imageview output)
+                // get image from assets (later from imageview output), and prepare input
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cats);
+                Tensor inputTensor = TensorImageUtils.bitmapToFloat32Tensor(bitmap, TensorImageUtils.TORCHVISION_NORM_MEAN_RGB, TensorImageUtils.TORCHVISION_NORM_STD_RGB);
+
+                // load pretrained module from assets
+                // Module module = Module.load("assets/model_resnet18.pt");
+
                 // apply cnn to the data
+
                 // load the result into imageview
             }
         });
