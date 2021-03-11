@@ -13,9 +13,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.pytorch.Module;
-import org.pytorch.Tensor;
-import org.pytorch.torchvision.TensorImageUtils;
+//import org.pytorch.Module;
+//import org.pytorch.Tensor;
+//import org.pytorch.torchvision.TensorImageUtils;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -99,14 +99,16 @@ public class MainActivity extends AppCompatActivity {
 
                 // get image from assets (later from imageview output), and prepare input
                 Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cats);
-                Tensor inputTensor = TensorImageUtils.bitmapToFloat32Tensor(bitmap, TensorImageUtils.TORCHVISION_NORM_MEAN_RGB, TensorImageUtils.TORCHVISION_NORM_STD_RGB);
 
+                // later versions...
+                // Tensor inputTensor = TensorImageUtils.bitmapToFloat32Tensor(bitmap, TensorImageUtils.TORCHVISION_NORM_MEAN_RGB, TensorImageUtils.TORCHVISION_NORM_STD_RGB);
                 // load pretrained module from assets
                 // Module module = Module.load("assets/model_resnet18.pt");
-
-                // apply cnn to the data
-
+                // pass bitmap input to model
                 // load the result into imageview
+
+                // apply convolution to bitmap input
+
             }
         });
 
