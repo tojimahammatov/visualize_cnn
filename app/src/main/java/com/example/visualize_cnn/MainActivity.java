@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadOriginalImage(){
         // load image from drawable
-        String drawable_uri = "@drawable/cats.jpeg";
+        String drawable_uri = "@drawable/cats.jpg";
         int imageResource = getResources().getIdentifier(drawable_uri, null, getPackageName());
         @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable = getApplicationContext().getDrawable(imageResource);
         mImageView.setImageDrawable(drawable);
@@ -158,12 +158,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateFilterTextView(boolean to_next){
         if (to_next){
-            mFilterTextView.setText(filters[(++filter_index) % filters.length]);
+            filter_index++;
+            if (filter_index >= filters.length){
+                filter_index = 0;
+            }
         }else{
-            mFilterTextView.setText(filters[(--filter_index) % filters.length]);
+            filter_index--;
+            if (filter_index<0){
+                filter_index = filters.length - 1;
+            }
         }
+        mFilterTextView.setText(filters[filter_index]);
     }
-
-
 
 }
