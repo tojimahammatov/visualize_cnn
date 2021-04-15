@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadOriginalImage(){
         // load image from drawable
-        String drawable_uri = "@drawable/cats.jpg";
+        String drawable_uri = "@drawable/cats";
         int imageResource = getResources().getIdentifier(drawable_uri, null, getPackageName());
         @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable = getApplicationContext().getDrawable(imageResource);
         mImageView.setImageDrawable(drawable);
