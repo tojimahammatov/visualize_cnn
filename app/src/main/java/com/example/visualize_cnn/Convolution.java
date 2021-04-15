@@ -6,12 +6,41 @@ import android.graphics.Color;
 
 public class Convolution {
 
+    private final FiltersBank mFiltersBank;
 
-    protected Bitmap convolveBitmap(Bitmap input, double[][] filter){
+    public Convolution(){
+        mFiltersBank = new FiltersBank();
+    }
+
+    protected Bitmap convolveBitmap(Bitmap input, String filter){
+
+        double[][] kernel;
+
+        // initialize kernel based on filter
+        switch (filter){
+            case "Edge":
+                kernel = mFiltersBank.EDGE;
+                break;
+            case "Blur":
+                kernel = mFiltersBank.BLUR;
+                break;
+            case "Gaussian Blur":
+                kernel = mFiltersBank.GAUSSIAN_BLUR;
+                break;
+            case "Sharpen":
+                kernel = mFiltersBank.SHARPEN;
+                break;
+            case "Unsharpen":
+                kernel = mFiltersBank.UNSHARP;
+                break;
+            default:
+                kernel = mFiltersBank.RANDOM;
+                break;
+        }
 
         // apply convolution to the bitmap input with the given filter
         //  and return bitmap output
-        int kernel_size = filter.length;
+        int kernel_size = kernel.length;
 
         int width = input.getWidth();
         int height = input.getHeight();
@@ -52,10 +81,10 @@ public class Convolution {
 
                 for (int k =0; k < kernel_size; k++){
                     for (int j = 0; j< kernel_size; j++){
-                        pixelR += (Color.red(sourceMatrix[k][j]) * filter[k][j]);
-                        pixelG += (Color.green(sourceMatrix[k][j]) * filter[k][j]);
-                        pixelB += (Color.blue(sourceMatrix[k][j]) * filter[k][j]);
-                        pixelA += (Color.alpha(sourceMatrix[k][j]) * filter[k][j]);
+                        pixelR += (Color.red(sourceMatrix[k][j]) * kernel[k][j]);
+                        pixelG += (Color.green(sourceMatrix[k][j]) * kernel[k][j]);
+                        pixelB += (Color.blue(sourceMatrix[k][j]) * kernel[k][j]);
+                        pixelA += (Color.alpha(sourceMatrix[k][j]) * kernel[k][j]);
                     }
                 }
 
