@@ -99,6 +99,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // disable applyCNNbutton
                 mApplyCNNButton.setEnabled(false);
+                // and rest buttons
+                mBackToRGBButton.setEnabled(false);
+                mNextButton.setEnabled(false);
+                mPrevButton.setEnabled(false);
 
                 // get image from assets (later from imageview output), and prepare input
                 Bitmap input_bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cats);
@@ -134,7 +138,13 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
 
+                // load convolved feature map
                 loadBitmapToImageView(output_bitmap);
+
+                // and enable buttons except apply_cnn
+                mBackToRGBButton.setEnabled(true);
+                mNextButton.setEnabled(true);
+                mPrevButton.setEnabled(true);
 
             }
         });
