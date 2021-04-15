@@ -29,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private Button mBackToRGBButton;
     private Button mApplyCNNButton;
 
-    private String[] filters = {"Edge", "Blur", "Gaussian Blur", "Sharpen", "Unsharpen", "Random"};
+    private final String[] filters = {"Edge", "Blur", "Gaussian Blur", "Sharpen", "Unsharpen", "Random"};
     private int filter_index = 0;
-    private FiltersBank mFiltersBank = null;
+    private Convolution mConvolution;
 
 
     @Override
@@ -58,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
         mBackToRGBButton = findViewById(R.id.back_to_org_img_button);
         mApplyCNNButton = findViewById(R.id.apply_cnn_button);
 
-        mFiltersBank = new FiltersBank();
-
+        mConvolution = new Convolution();
     }
 
 
@@ -115,29 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 // load the result into imageview
 
                 // apply convolution to bitmap input
-                Convolution convolution = new Convolution();
-                Bitmap output_bitmap;
-                switch (mFilterTextView.getText().toString()){
-                    case "Edge":
-                        output_bitmap = convolution.convolveBitmap(input_bitmap, mFiltersBank.EDGE);
-                        break;
-                    case "Blur":
-                        output_bitmap = convolution.convolveBitmap(input_bitmap, mFiltersBank.BLUR);
-                        break;
-                    case "Gaussian Blur":
-                        output_bitmap = convolution.convolveBitmap(input_bitmap, mFiltersBank.GAUSSIAN_BLUR);
-                        break;
-                    case "Sharpen":
-                        output_bitmap = convolution.convolveBitmap(input_bitmap, mFiltersBank.SHARPEN);
-                        break;
-                    case "Unsharpen":
-                        output_bitmap = convolution.convolveBitmap(input_bitmap, mFiltersBank.UNSHARP);
-                        break;
-                    default:
-                        output_bitmap = convolution.convolveBitmap(input_bitmap, mFiltersBank.RANDOM);
-                        break;
-                }
-
+                Bitmap output_bitmap = mConvolution.convolveBitmap(input_bitmap, mFilterTextView.getText().toString());
                 // load convolved feature map
                 loadBitmapToImageView(output_bitmap);
 
