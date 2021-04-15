@@ -99,9 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 // disable applyCNNbutton
                 mApplyCNNButton.setEnabled(false);
                 // and rest buttons
-                mBackToRGBButton.setEnabled(false);
-                mNextButton.setEnabled(false);
-                mPrevButton.setEnabled(false);
+                changeButtonStates(false);
 
                 // get image from assets (later from imageview output), and prepare input
                 Bitmap input_bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cats);
@@ -119,9 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 loadBitmapToImageView(output_bitmap);
 
                 // and enable buttons except apply_cnn
-                mBackToRGBButton.setEnabled(true);
-                mNextButton.setEnabled(true);
-                mPrevButton.setEnabled(true);
+                changeButtonStates(true);
 
             }
         });
@@ -156,6 +152,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         mFilterTextView.setText(filters[filter_index]);
+    }
+
+
+    private void changeButtonStates(boolean state){
+        mBackToRGBButton.setEnabled(state);
+        mNextButton.setEnabled(state);
+        mPrevButton.setEnabled(state);
     }
 
 }
