@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mBackToRGBButton;
     private Button mApplyCNNButton;
 
-    private final String[] filters = {"Edge", "Blur", "Gaussian Blur", "Sharpen", "Unsharpen", "Random"};
+    private final String[] filters = {"Edge", "Blur", "Gaussian Blur", "Sharpen", "Unsharpen", "Random", "Neutral"};
     private int filter_index = 0;
     private Convolution mConvolution;
 
@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         init();
 
         setClickListenersToWidgets();
-
 
     }
 
@@ -112,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
                 // load the result into imageview
 
                 // apply convolution to bitmap input
-                Bitmap output_bitmap = mConvolution.convolveBitmap(input_bitmap, mFilterTextView.getText().toString());
+                // Bitmap output_bitmap = mConvolution.convolveBitmap(input_bitmap, mFilterTextView.getText().toString());
+                Bitmap output_bitmap = mConvolution.convolveBitmapV2(input_bitmap, mFilterTextView.getText().toString());
                 // load convolved feature map
                 loadBitmapToImageView(output_bitmap);
 
